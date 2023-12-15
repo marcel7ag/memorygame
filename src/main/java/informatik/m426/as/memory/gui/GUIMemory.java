@@ -14,6 +14,8 @@ public class GUIMemory extends JFrame{
     private JPanel memory;
     private GridBagConstraints memoGrid;
     private JLabel timerLabel;
+    private ImageIcon img1 = new ImageIcon("images/circle.png");
+
     public GUIMemory(){
         super("Memory Game");
         setLayout(new BorderLayout());
@@ -25,13 +27,15 @@ public class GUIMemory extends JFrame{
         cards = new JButton[cardSize];
 
         for (int i = 0; i < (cardSize/2); i++){
-            cardsValue.add(i);
-            cardsValue.add(i);
+            cardsValue.add(img1);
+            cardsValue.add(img1);
         }
+
         Collections.shuffle(cardsValue);
 
         for (int i = 0; i < cardsValue.size(); i++){
             cards[i] = new JButton();
+            cards[i].setIcon((ImageIcon) cardsValue.get(i));
         }
         memoGrid = new GridBagConstraints();
         memory = new JPanel(new GridBagLayout());
