@@ -3,12 +3,27 @@ import informatik.m426.as.memory.gui.GUIMemory;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+/**
+ * Diese Klasse enthält die Hauptlogik des Memory-Spiels.
+ */
 public class Main {
+
+    /**
+     * Die Anzahl der Sekunden, die seit dem Start des Spiels vergangen sind.
+     */
     public static int seconds = 0;
+
+    /**
+     * Die Hauptmethode des Programms.
+     * Sie erstellt eine neue Instanz von GUIMemory und Memory und startet das Spiel.
+     * @param args Die Argumente, die an das Programm übergeben werden.
+     */
     public static void main(String[] args) {
         GUIMemory memoryGame = new GUIMemory();
         Memory memory = new Memory(memoryGame);
 
+        //Spiel wird eingerichtet mit gui();
         memoryGame.gui();
 
         int delay = 1000; // delay in milliseconds
@@ -19,6 +34,8 @@ public class Main {
                 memoryGame.getTimerLabel().setText(String.format("Zeit: %02d:%02d", seconds / 60, seconds % 60));
             }
         });
+
+        //ActionListener, um die Logik des Spiels zu erstellen.
         ActionListener cards = new ActionListener() {
             int clickCount = 0;
             JButton firstButton,secondButton;
