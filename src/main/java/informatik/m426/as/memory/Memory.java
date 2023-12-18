@@ -3,7 +3,6 @@ package informatik.m426.as.memory;
 import informatik.m426.as.memory.gui.GUIMemory;
 
 import javax.swing.*;
-import java.util.Objects;
 
 public class Memory{
     private GUIMemory memory;
