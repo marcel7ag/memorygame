@@ -1,7 +1,6 @@
 package informatik.m426.as.memory;
 
 import informatik.m426.as.memory.gui.GUIMemory;
-
 import javax.swing.*;
 
 
@@ -21,6 +20,7 @@ public class Memory{
         this.memory = memory;
     }
 
+
     /**
      * Zeigt den Wert der angeklickten Karte an.
      *
@@ -36,6 +36,7 @@ public class Memory{
             }
         }
         memory.getCards()[index].setIcon(memory.setBackgroundImage(memory.getCardImages().get((Integer) memory.getCardsValue().get(index)).toString()));
+        memory.getCards()[index].setDisabledIcon(memory.setBackgroundImage(memory.getCardImages().get((Integer) memory.getCardsValue().get(index)).toString()));
         return (int) memory.getCardsValue().get(index);
     }
 
@@ -65,4 +66,5 @@ public class Memory{
         }
         return true;
     }
+
 }

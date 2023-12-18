@@ -34,7 +34,7 @@ public class GUIMemory extends JFrame{
         colCounter = 0;
         cardsValue = new ArrayList<>();
 
-        imagePath = "C:\\BENEDICT\\IT2b\\M426\\Projekt4_MemoryGame\\memory\\memory\\src\\main\\resources\\imges";
+        imagePath = "C:\\BENEDICT\\IT2b\\M426\\Projekt4_MemoryGame\\memory\\memory\\src\\main\\resources\\images";
         defaultImage = imagePath+"\\default\\0.gif";
 
         cardImages = new ArrayList<String>();
