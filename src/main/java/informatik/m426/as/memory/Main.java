@@ -57,7 +57,7 @@ public class Main {
                     int result = JOptionPane.showOptionDialog(memoryGame, "Du hast gewonnen!", "Glückwunsch", JOptionPane.DEFAULT_OPTION,
                             JOptionPane.INFORMATION_MESSAGE, null, null, null);
 
-                    if (result == JOptionPane.OK_OPTION) {
+                    if (result == JOptionPane.OK_OPTION ||result == JOptionPane.CLOSED_OPTION) {
                         clickCount = 0;
                         memoryGame.resetGame();
                         seconds = 0;
