@@ -10,12 +10,11 @@ import javax.swing.Timer;
 public class GUIMemory extends JFrame{
     private int cardSize, colCounter, rowSize;
     private JButton[] cards;
-    private ArrayList cardsValue;
+    private ArrayList cardsValue,cardImages;
     private JPanel memory;
     private GridBagConstraints memoGrid;
     private JLabel timerLabel;
-    private ImageIcon img1 = new ImageIcon("images/circle.png");
-
+    private String defaultImage,imagePath;
     public GUIMemory(){
         super("Memory Game");
         setLayout(new BorderLayout());
@@ -24,22 +23,34 @@ public class GUIMemory extends JFrame{
         rowSize = cardSize/4;
         colCounter = 0;
         cardsValue = new ArrayList<>();
+
+        imagePath = "C:\\BENEDICT\\IT2b\\M426\\Projekt4_MemoryGame\\memory\\memory\\src\\main\\resources\\imges";
+        defaultImage = imagePath+"\\default\\0.gif";
+
+        cardImages = new ArrayList<String>();
+        cardImages.add(imagePath+"/0.gif");
+        cardImages.add(imagePath+"/1.gif");
+        cardImages.add(imagePath+"/2.gif");
+        cardImages.add(imagePath+"/3.gif");
+        cardImages.add(imagePath+"/4.gif");
+        cardImages.add(imagePath+"/5.gif");
+        cardImages.add(imagePath+"/6.gif");
+        cardImages.add(imagePath+"/7.gif");
+
         cards = new JButton[cardSize];
 
         for (int i = 0; i < (cardSize/2); i++){
-            cardsValue.add(img1);
-            cardsValue.add(img1);
+            cardsValue.add(i);
+            cardsValue.add(i);
         }
-
         Collections.shuffle(cardsValue);
 
         for (int i = 0; i < cardsValue.size(); i++){
             cards[i] = new JButton();
-            cards[i].setIcon((ImageIcon) cardsValue.get(i));
         }
         memoGrid = new GridBagConstraints();
         memory = new JPanel(new GridBagLayout());
-        timerLabel = new JLabel();
+        timerLabel = new JLabel("Zeit: 00:00");
     }
 
     public void gui(){
@@ -60,6 +71,9 @@ public class GUIMemory extends JFrame{
             cards[i].setPreferredSize(new Dimension(0, 150));
             cards[i].setFont(new Font("Arial", Font.PLAIN, 24));
             cards[i].setBackground(Color.lightGray);
+
+            cards[i].setIcon(setBackgroundImage(defaultImage));
+
             memoGrid.gridy = colCounter;
             memory.add(cards[i], memoGrid);
             colCounter++;
@@ -72,11 +86,14 @@ public class GUIMemory extends JFrame{
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
-    public JLabel getTimerLabel() {
+    public JLabel getTimerLabel(){
         return timerLabel;
     }
     public JButton[] getCards() {return cards;}
     public ArrayList getCardsValue() {return cardsValue;}
+    public ArrayList getCardImages() {return cardImages;}
+    public String getDefaultImage() {return defaultImage;}
+
     public void createActionListeners(ActionListener listener) {
         for (JButton button : cards) {
             button.addActionListener(listener);
@@ -84,9 +101,16 @@ public class GUIMemory extends JFrame{
     }
     public void resetGame(){
         for (JButton button : getCards()) {
-            button.setText("");
+            button.setIcon(setBackgroundImage(getDefaultImage()));
             button.setEnabled(true);
         }
         gui();
+    }
+    public ImageIcon setBackgroundImage(String imagePath){
+        ImageIcon imageIcon = new ImageIcon(imagePath);
+        Image image = imageIcon.getImage();
+        Image scaledImage = image.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        return scaledIcon;
     }
 }

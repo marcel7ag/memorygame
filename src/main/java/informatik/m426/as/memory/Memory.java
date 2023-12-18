@@ -10,7 +10,7 @@ public class Memory{
     public Memory(GUIMemory memory){
         this.memory = memory;
     }
-    public void showValue(JButton targetButton){
+    public int showValue(JButton targetButton){
         int index = 0;
         for (int i = 0; i < memory.getCards().length; i++) {
             JButton button =  memory.getCards()[i];
@@ -18,11 +18,12 @@ public class Memory{
                 index = i;
             }
         }
-        memory.getCards()[index].setText(memory.getCardsValue().get(index).toString());
+        memory.getCards()[index].setIcon(memory.setBackgroundImage(memory.getCardImages().get((Integer) memory.getCardsValue().get(index)).toString()));
+        return (int) memory.getCardsValue().get(index);
     }
     public void hideValue(JButton button1, JButton button2){
-        button1.setText("");
-        button2.setText("");
+        button1.setIcon(memory.setBackgroundImage(memory.getDefaultImage()));
+        button2.setIcon(memory.setBackgroundImage(memory.getDefaultImage()));
     }
     public boolean checkWin(){
         for (int i = 0; i < memory.getCards().length; i++) {

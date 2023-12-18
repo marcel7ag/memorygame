@@ -10,10 +10,9 @@ public class Main {
         Memory memory = new Memory(memoryGame);
 
         memoryGame.gui();
-        memoryGame.getTimerLabel().setText("Zeit: 00:00");
+
         int delay = 1000; // delay in milliseconds
         Timer timer = new Timer(delay, new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 seconds++;
@@ -22,30 +21,30 @@ public class Main {
         });
         ActionListener cards = new ActionListener() {
             int clickCount = 0;
-            JButton firstButton;
-            JButton secondButton;
+            JButton firstButton,secondButton;
+            int value1, value2;
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 if (clickCount == 0){
                     if (!timer.isRunning()){
                         timer.restart();
                     }
                     firstButton = (JButton) e.getSource();
-                    memory.showValue(firstButton);
+                    value1 = memory.showValue(firstButton);
                     clickCount++;
                 } else if (clickCount == 1) {
-
                     secondButton = (JButton) e.getSource();
-                    memory.showValue(secondButton);
+                    value2 = memory.showValue(secondButton);
                     clickCount++;
                 } else if (clickCount == 2){
                         if (!firstButton.equals(secondButton) && !secondButton.equals(firstButton)){
-                            if (firstButton.getText().equals(secondButton.getText())){
+                            if (value1 == value2){
                                 firstButton.setEnabled(false);
                                 secondButton.setEnabled(false);
+                                //System.out.println("Correct");
                             } else {
                                 memory.hideValue(firstButton, secondButton);
+                                //System.out.println("hidden");
                             }
                             clickCount = 0;
                         } else {
@@ -57,13 +56,12 @@ public class Main {
                     int result = JOptionPane.showOptionDialog(memoryGame, "Du hast gewonnen!", "Glückwunsch", JOptionPane.DEFAULT_OPTION,
                             JOptionPane.INFORMATION_MESSAGE, null, null, null);
 
-                    if (result == JOptionPane.OK_OPTION ||result == JOptionPane.CLOSED_OPTION) {
+                    if (result == JOptionPane.OK_OPTION || result == JOptionPane.CLOSED_OPTION) {
                         clickCount = 0;
                         memoryGame.resetGame();
                         seconds = 0;
                         memoryGame.getTimerLabel().setText(String.format("Zeit: %02d:%02d", seconds / 60, seconds % 60));
                     }
-
                 }
             }
         };
